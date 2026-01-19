@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj6jjyvvx8iev"]
+
+[ext_resource type="Theme" uid="uid://cbsyckauno77k" path="res://Datas/Themes/transactions-table-row.tres" id="1_mdq0j"]
+[ext_resource type="Script" uid="uid://bfy6ftsuqmw8w" path="res://Scripts/Transaction/transaction_row.gd" id="1_xile8"]
+
+[node name="TransactionRow" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+mouse_filter = 2
+theme = ExtResource("1_mdq0j")
+script = ExtResource("1_xile8")
+
+[node name="TimeLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "2025-01-01 23:59:59"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemIDLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "P000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemNameLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Lovie"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemPriceLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "99.000 VND"
+horizontal_alignment = 1
+vertical_alignment = 1

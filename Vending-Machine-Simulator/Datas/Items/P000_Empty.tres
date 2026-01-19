@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://cymg20qbg38vf"]
+
+[ext_resource type="Script" uid="uid://d3pbgut3hdwn8" path="res://Scripts/item.gd" id="1_b5kn4"]
+
+[resource]
+script = ExtResource("1_b5kn4")
+id = "P000"
+name = "Empty"

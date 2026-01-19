@@ -1,0 +1,223 @@
+[gd_scene load_steps=8 format=3 uid="uid://thdgeebd677i"]
+
+[ext_resource type="Theme" uid="uid://bffydklt87em5" path="res://Datas/Themes/transactions-display.tres" id="1_otesr"]
+[ext_resource type="Script" uid="uid://rb0yclch5xxf" path="res://Scripts/Display/transactions_display.gd" id="2_orbx2"]
+[ext_resource type="PackedScene" uid="uid://dj6jjyvvx8iev" path="res://Scenes/transaction_row.tscn" id="3_5sodq"]
+[ext_resource type="Theme" uid="uid://brlv0wjxrcwt" path="res://Datas/Themes/transactions-table-header.tres" id="4_lclcw"]
+[ext_resource type="Theme" uid="uid://ctcexh1lops5c" path="res://Datas/Themes/transactions-display-bottom.tres" id="5_6im3v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6im3v"]
+bg_color = Color(0, 0.41568628, 0.83137256, 1)
+border_width_left = 10
+border_color = Color(0, 0.41568628, 0.83137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lclcw"]
+bg_color = Color(0, 0.41568628, 0.83137256, 1)
+border_width_left = 10
+border_color = Color(0, 0.41568628, 0.83137256, 1)
+
+[node name="TransactionsDisplay" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_otesr")
+script = ExtResource("2_orbx2")
+row_scene = ExtResource("3_5sodq")
+
+[node name="BG" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 476)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Contents" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TableHeader" parent="Contents" instance=ExtResource("3_5sodq")]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme = ExtResource("4_lclcw")
+
+[node name="TimeLabel" parent="Contents/TableHeader" index="0"]
+text = "PurchaseDate"
+
+[node name="ItemIDLabel" parent="Contents/TableHeader" index="1"]
+text = "ItemID"
+
+[node name="ItemNameLabel" parent="Contents/TableHeader" index="2"]
+text = "Name"
+
+[node name="ItemPriceLabel" parent="Contents/TableHeader" index="3"]
+text = "Price"
+
+[node name="Table" type="ScrollContainer" parent="Contents"]
+custom_minimum_size = Vector2(0, 392)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBox" type="VBoxContainer" parent="Contents/Table"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Bottom" type="HBoxContainer" parent="Contents"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_6im3v")
+alignment = 2
+
+[node name="VBox" type="VBoxContainer" parent="Contents/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="Contents/Bottom/VBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Contents/Bottom/VBox/HBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_6im3v")
+text = "Filters:"
+vertical_alignment = 1
+
+[node name="ButtonsPanel" type="PanelContainer" parent="Contents/Bottom/VBox/HBox"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Contents/Bottom/VBox/HBox/ButtonsPanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="SaveButton" type="Button" parent="Contents/Bottom/VBox/HBox/ButtonsPanel/HBox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="Contents/Bottom/VBox/HBox/ButtonsPanel/HBox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load"
+
+[node name="ItemFilter" type="HBoxContainer" parent="Contents/Bottom/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Contents/Bottom/VBox/ItemFilter"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+text = "Item"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="OptionButton" parent="Contents/Bottom/VBox/ItemFilter"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+selected = 0
+item_count = 1
+popup/item_0/text = "None"
+popup/item_0/id = 0
+
+[node name="DateFilter" type="HBoxContainer" parent="Contents/Bottom/VBox"]
+layout_mode = 2
+
+[node name="TimeLabels" type="VBoxContainer" parent="Contents/Bottom/VBox/DateFilter"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="DateLabel" type="Label" parent="Contents/Bottom/VBox/DateFilter/TimeLabels"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Date"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="Contents/Bottom/VBox/DateFilter/TimeLabels"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DateComponent1" type="VBoxContainer" parent="Contents/Bottom/VBox/DateFilter"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Date" type="LineEdit" parent="Contents/Bottom/VBox/DateFilter/DateComponent1"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "1999-01-01"
+alignment = 1
+
+[node name="Time" type="LineEdit" parent="Contents/Bottom/VBox/DateFilter/DateComponent1"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "00:00:00"
+placeholder_text = "00:00:00"
+alignment = 1
+editable = false
+
+[node name="ToLabel" type="Label" parent="Contents/Bottom/VBox/DateFilter"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "to"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DateComponent2" type="VBoxContainer" parent="Contents/Bottom/VBox/DateFilter"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Date" type="LineEdit" parent="Contents/Bottom/VBox/DateFilter/DateComponent2"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "YYYY-MM-DD"
+alignment = 1
+
+[node name="Time" type="LineEdit" parent="Contents/Bottom/VBox/DateFilter/DateComponent2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "23:59:59"
+placeholder_text = "23:59:59"
+alignment = 1
+editable = false
+
+[node name="RevenueLabel" type="Label" parent="Contents/Bottom/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_lclcw")
+text = "Revenue: 0.000 VND"
+vertical_alignment = 1
+
+[node name="FileDialog" type="FileDialog" parent="."]
+oversampling_override = 1.0
+initial_position = 1
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.csv")
+use_native_dialog = true
+
+[connection signal="pressed" from="Contents/Bottom/VBox/HBox/ButtonsPanel/HBox/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Contents/Bottom/VBox/HBox/ButtonsPanel/HBox/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="item_selected" from="Contents/Bottom/VBox/ItemFilter/Options" to="." method="_on_item_options_item_selected"]
+[connection signal="text_submitted" from="Contents/Bottom/VBox/DateFilter/DateComponent1/Date" to="." method="_on_dc1_date_submitted"]
+[connection signal="text_submitted" from="Contents/Bottom/VBox/DateFilter/DateComponent1/Time" to="." method="_on_dc1_time_submitted"]
+[connection signal="text_submitted" from="Contents/Bottom/VBox/DateFilter/DateComponent2/Date" to="." method="_on_dc2_date_submitted"]
+[connection signal="text_submitted" from="Contents/Bottom/VBox/DateFilter/DateComponent2/Time" to="." method="_on_dc2_time_submitted"]
+[connection signal="canceled" from="FileDialog" to="." method="_on_file_dialog_canceled"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+
+[editable path="Contents/TableHeader"]

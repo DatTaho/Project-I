@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgno5yette44v"]
+
+[ext_resource type="Script" uid="uid://dccy085srtg6x" path="res://Scripts/item_panel.gd" id="1_fnh3e"]
+[ext_resource type="Theme" uid="uid://dldffuj8l4b5l" path="res://Datas/Themes/item-panel-valid.tres" id="1_roktq"]
+[ext_resource type="Resource" uid="uid://cymg20qbg38vf" path="res://Datas/Items/P000_Empty.tres" id="2_u5jdm"]
+[ext_resource type="ButtonGroup" uid="uid://b1seq18git3ps" path="res://Datas/ButtonGroups/item_buttons.tres" id="3_c15ml"]
+
+[node name="ItemPanel" type="MarginContainer"]
+z_index = -1
+custom_minimum_size = Vector2(200, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_roktq")
+script = ExtResource("1_fnh3e")
+item = ExtResource("2_u5jdm")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+toggle_mode = true
+button_group = ExtResource("3_c15ml")
+
+[node name="Texts" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBox" type="HBoxContainer" parent="Texts"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IndexLabel" type="Label" parent="Texts/HBox"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemCountLabel" type="Label" parent="Texts/HBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Qty: --/--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel" type="Label" parent="Texts"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 24
+text = "Empty"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Texts"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "0.000 VND"
+horizontal_alignment = 1
+vertical_alignment = 1

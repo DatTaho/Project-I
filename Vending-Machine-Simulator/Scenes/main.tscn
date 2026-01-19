@@ -1,0 +1,228 @@
+[gd_scene load_steps=22 format=3 uid="uid://gex38xc2d7jt"]
+
+[ext_resource type="Script" uid="uid://k7l6xor2g2ku" path="res://Scripts/main.gd" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cgno5yette44v" path="res://Scenes/item_panel.tscn" id="2_8gbba"]
+[ext_resource type="Theme" uid="uid://ccr1yrqibh0a2" path="res://Datas/Themes/item-view-theme.tres" id="2_21xkr"]
+[ext_resource type="Script" uid="uid://gv1xv646n0fa" path="res://Scripts/State/operation_state.gd" id="2_ynf5e"]
+[ext_resource type="Script" uid="uid://dpo33g0r30ety" path="res://Scripts/item_spawner.gd" id="3_b3802"]
+[ext_resource type="Script" uid="uid://bq5ouibciijpl" path="res://Scripts/State/maintenance_state.gd" id="3_hptm8"]
+[ext_resource type="Resource" uid="uid://ciffrrwqyd4v7" path="res://Datas/Items/P001_Lovie.tres" id="4_21xkr"]
+[ext_resource type="Script" uid="uid://dhsgiya2meidl" path="res://Scripts/inventory_grid.gd" id="4_h1bgf"]
+[ext_resource type="Theme" uid="uid://qvt2wm7jyvle" path="res://Datas/Themes/side-view-theme.tres" id="5_21xkr"]
+[ext_resource type="Resource" uid="uid://b0dbmcoyhwofd" path="res://Datas/Items/P002_Camta.tres" id="7_hptm8"]
+[ext_resource type="Resource" uid="uid://t8m147g4r5vv" path="res://Datas/Items/P003_Stung.tres" id="8_6iyac"]
+[ext_resource type="PackedScene" uid="uid://thdgeebd677i" path="res://Scenes/transactions_display.tscn" id="8_fevyy"]
+[ext_resource type="Script" uid="uid://c8sgcuw517t3s" path="res://Scripts/push_flap.gd" id="8_wsu2k"]
+[ext_resource type="PackedScene" uid="uid://dhfulu7lit53c" path="res://Scenes/preview_display.tscn" id="9_hptm8"]
+[ext_resource type="PackedScene" uid="uid://bqscw26pl7u2d" path="res://Scenes/control_display.tscn" id="10_d1ilt"]
+[ext_resource type="PackedScene" uid="uid://yl4hs2q8887o" path="res://Scenes/console_display.tscn" id="10_wsu2k"]
+[ext_resource type="Script" uid="uid://dv8d5qo58s2od" path="res://Scripts/transaction_logs.gd" id="11_fdnlq"]
+[ext_resource type="PackedScene" uid="uid://xvyu7xmyehbs" path="res://Scenes/maintenance_options.tscn" id="12_wsu2k"]
+[ext_resource type="PackedScene" uid="uid://brsqrvyh8ljn6" path="res://Scenes/drop_item.tscn" id="16_k12tt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_344ge"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 140
+border_width_top = 40
+border_width_right = 140
+border_width_bottom = 20
+border_color = Color(0, 0.41568628, 0.83137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynf5e"]
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.40069804, 0.40069762, 0.40069756, 1)
+
+[node name="Main" type="Control"]
+custom_minimum_size = Vector2(1000, 800)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_bo1nx")
+items_file = "res://Datas/Items/items.cfg"
+coins = Array[int]([100, 50, 20, 10, 5, 2, 1])
+dispense_delay = 0.2
+
+[node name="States" type="Node" parent="."]
+
+[node name="OperationState" type="Node" parent="States" node_paths=PackedStringArray("preview_display", "console_display", "control_display", "system")]
+script = ExtResource("2_ynf5e")
+preview_display = NodePath("../../HBox/SideView/DisplayPanel/PreviewDisplay")
+console_display = NodePath("../../HBox/SideView/DisplayPanel/ConsoleDisplay")
+control_display = NodePath("../../HBox/SideView/ControlPanel/ControlDisplay")
+system = NodePath("../..")
+
+[node name="MaintenanceState" type="Node" parent="States" node_paths=PackedStringArray("preview_display", "console_display", "item_spawner", "options", "system")]
+script = ExtResource("3_hptm8")
+preview_display = NodePath("../../HBox/SideView/DisplayPanel/PreviewDisplay")
+console_display = NodePath("../../HBox/SideView/DisplayPanel/ConsoleDisplay")
+item_spawner = NodePath("../../ItemSpawner")
+options = NodePath("../../MaintenanceOptions")
+system = NodePath("../..")
+
+[node name="TransactionLogs" type="Node" parent="."]
+script = ExtResource("11_fdnlq")
+transaction_file = "/home/zoii/Documents/HUST/2025.1/Project I/test.csv"
+
+[node name="ItemSpawner" type="Node" parent="."]
+script = ExtResource("3_b3802")
+drop_item = ExtResource("16_k12tt")
+
+[node name="WallCollisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WallCollisions"]
+polygon = PackedVector2Array(0, 0, 0, 800, 640, 800, 640, 0, 624, 0, 624, 624, 480, 760, 160, 760, 16, 624, 16, 0)
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="ItemView" type="PanelContainer" parent="HBox"]
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_21xkr")
+
+[node name="TransactionsDisplay" parent="HBox/ItemView" node_paths=PackedStringArray("system", "transaction_logs") instance=ExtResource("8_fevyy")]
+visible = false
+layout_mode = 2
+system = NodePath("../../..")
+transaction_logs = NodePath("../../../TransactionLogs")
+
+[node name="ItemsDisplay" type="VBoxContainer" parent="HBox/ItemView"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="InventoryGrid" type="GridContainer" parent="HBox/ItemView/ItemsDisplay" node_paths=PackedStringArray("item_spawner")]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+script = ExtResource("4_h1bgf")
+item_spawner = NodePath("../../../../ItemSpawner")
+
+[node name="ItemPanel" parent="HBox/ItemView/ItemsDisplay/InventoryGrid" instance=ExtResource("2_8gbba")]
+layout_mode = 2
+item = ExtResource("4_21xkr")
+item_count = 10
+
+[node name="ItemPanel2" parent="HBox/ItemView/ItemsDisplay/InventoryGrid" instance=ExtResource("2_8gbba")]
+layout_mode = 2
+index = 1
+item = ExtResource("7_hptm8")
+item_count = 10
+
+[node name="ItemPanel3" parent="HBox/ItemView/ItemsDisplay/InventoryGrid" instance=ExtResource("2_8gbba")]
+layout_mode = 2
+index = 2
+item = ExtResource("8_6iyac")
+item_count = 10
+
+[node name="ItemPanel4" parent="HBox/ItemView/ItemsDisplay/InventoryGrid" instance=ExtResource("2_8gbba")]
+layout_mode = 2
+index = 3
+
+[node name="ItemPanel5" parent="HBox/ItemView/ItemsDisplay/InventoryGrid" instance=ExtResource("2_8gbba")]
+layout_mode = 2
+index = 4
+
+[node name="ItemPanel6" parent="HBox/ItemView/ItemsDisplay/InventoryGrid" instance=ExtResource("2_8gbba")]
+layout_mode = 2
+index = 5
+
+[node name="ItemPanel7" parent="HBox/ItemView/ItemsDisplay/InventoryGrid" instance=ExtResource("2_8gbba")]
+layout_mode = 2
+index = 6
+
+[node name="ItemPanel8" parent="HBox/ItemView/ItemsDisplay/InventoryGrid" instance=ExtResource("2_8gbba")]
+layout_mode = 2
+index = 7
+
+[node name="ItemPanel9" parent="HBox/ItemView/ItemsDisplay/InventoryGrid" instance=ExtResource("2_8gbba")]
+layout_mode = 2
+index = 8
+
+[node name="BottomPanel" type="PanelContainer" parent="HBox/ItemView/ItemsDisplay"]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_344ge")
+
+[node name="PushFlap" type="Control" parent="HBox/ItemView/ItemsDisplay/BottomPanel"]
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("8_wsu2k")
+
+[node name="PushFlapVisual" type="Label" parent="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 100.0
+size_flags_vertical = 1
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_ynf5e")
+text = "PUSH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SideView" type="VSplitContainer" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_21xkr")
+dragger_visibility = 2
+touch_dragger_enabled = true
+drag_area_offset = -16
+
+[node name="DisplayPanel" type="PanelContainer" parent="HBox/SideView"]
+custom_minimum_size = Vector2(0, 280)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PreviewDisplay" parent="HBox/SideView/DisplayPanel" node_paths=PackedStringArray("system") instance=ExtResource("9_hptm8")]
+layout_mode = 2
+system = NodePath("../../../..")
+
+[node name="ConsoleDisplay" parent="HBox/SideView/DisplayPanel" node_paths=PackedStringArray("system", "transaction_logs") instance=ExtResource("10_wsu2k")]
+visible = false
+layout_mode = 2
+system = NodePath("../../../..")
+transaction_logs = NodePath("../../../../TransactionLogs")
+
+[node name="ControlPanel" type="PanelContainer" parent="HBox/SideView"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ControlDisplay" parent="HBox/SideView/ControlPanel" node_paths=PackedStringArray("system", "transaction_logs") instance=ExtResource("10_d1ilt")]
+layout_mode = 2
+system = NodePath("../../../..")
+transaction_logs = NodePath("../../../../TransactionLogs")
+
+[node name="MaintenanceOptions" parent="." node_paths=PackedStringArray("system") instance=ExtResource("12_wsu2k")]
+visible = false
+z_index = 1
+layout_mode = 0
+system = NodePath("..")
+
+[connection signal="items_loaded" from="." to="HBox/ItemView/TransactionsDisplay" method="_on_main_items_loaded"]
+[connection signal="items_loaded" from="." to="MaintenanceOptions" method="_on_main_items_loaded"]
+[connection signal="load_transaction" from="TransactionLogs" to="HBox/SideView/DisplayPanel/ConsoleDisplay" method="_on_transaction_logs_load_transaction"]
+[connection signal="save_transaction" from="TransactionLogs" to="HBox/SideView/DisplayPanel/ConsoleDisplay" method="_on_transaction_logs_save_transaction"]
+[connection signal="mouse_entered" from="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" to="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" to="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap/PushFlapVisual" to="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" method="_on_push_flap_visual_mouse_entered"]

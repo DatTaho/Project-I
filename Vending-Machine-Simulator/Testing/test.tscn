@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7tdgffpv06vg"]
+
+[ext_resource type="Script" uid="uid://b44fs5u04jrjj" path="res://Testing/test.gd" id="1_ah3r7"]
+[ext_resource type="Script" uid="uid://dv8d5qo58s2od" path="res://Scripts/transaction_logs.gd" id="2_mow8e"]
+
+[node name="Test" type="Node"]
+script = ExtResource("1_ah3r7")
+
+[node name="TransactionLogs" type="Node" parent="."]
+script = ExtResource("2_mow8e")
+metadata/_custom_type_script = "uid://dv8d5qo58s2od"

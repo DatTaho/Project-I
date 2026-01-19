@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://ciffrrwqyd4v7"]
+
+[ext_resource type="Script" uid="uid://d3pbgut3hdwn8" path="res://Scripts/item.gd" id="1_d1gwn"]
+
+[resource]
+script = ExtResource("1_d1gwn")
+id = "P001"
+name = "Lovie"
+icon = "uid://dqx5j0toypw1y"
+price = 5
+metadata/_custom_type_script = "uid://d3pbgut3hdwn8"

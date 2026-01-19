@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cbsyckauno77k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riccf"]
+bg_color = Color(0.55, 0.55, 0.55, 1)
+
+[resource]
+Label/styles/normal = SubResource("StyleBoxFlat_riccf")

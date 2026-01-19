@@ -1,0 +1,43 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://qvt2wm7jyvle"]
+
+[ext_resource type="Texture2D" uid="uid://drplo1h232d4j" path="res://Assets/touch-dragger.png" id="1_1mtbg"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dulpl"]
+color = Color(1, 1, 1, 1)
+thickness = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4t6t"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_right = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1mtbg"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dulpl"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1mtbg"]
+color = Color(1, 1, 1, 1)
+thickness = 20
+vertical = true
+
+[resource]
+Button/font_sizes/font_size = 20
+HBoxContainer/constants/separation = 0
+HSeparator/constants/separation = 20
+HSeparator/styles/separator = SubResource("StyleBoxLine_dulpl")
+Label/font_sizes/font_size = 24
+Label/styles/normal = SubResource("StyleBoxFlat_t4t6t")
+Panel/styles/panel = SubResource("StyleBoxFlat_1mtbg")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_dulpl")
+VBoxContainer/constants/separation = 20
+VSeparator/constants/separation = 20
+VSeparator/styles/separator = SubResource("StyleBoxLine_1mtbg")
+VSplitContainer/icons/touch_dragger = ExtResource("1_1mtbg")

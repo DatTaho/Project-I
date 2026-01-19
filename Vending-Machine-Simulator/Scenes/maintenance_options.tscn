@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://xvyu7xmyehbs"]
+
+[ext_resource type="Script" uid="uid://b5tu650ths14f" path="res://Scripts/Display/maintenance_options.gd" id="1_7p35k"]
+[ext_resource type="Theme" uid="uid://cpsgjg3k888c7" path="res://Datas/Themes/maintenace-options-theme.tres" id="1_esn3e"]
+
+[node name="TechnicianOptions" type="Control"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 104.0
+theme = ExtResource("1_esn3e")
+script = ExtResource("1_7p35k")
+
+[node name="Container" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 104.0
+
+[node name="VBox" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="RestockButton" type="Button" parent="Container/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Restock"
+alignment = 0
+
+[node name="ItemOptions" type="OptionButton" parent="Container/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+flat = true
+allow_reselect = true
+
+[connection signal="pressed" from="Container/VBox/RestockButton" to="." method="_on_restock_button_pressed"]
+[connection signal="item_selected" from="Container/VBox/ItemOptions" to="." method="_on_item_options_item_selected"]

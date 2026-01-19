@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqscw26pl7u2d"]
+
+[ext_resource type="Script" uid="uid://dcpdh5p0cin58" path="res://Scripts/Display/control_display.gd" id="1_lvh1d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7553d"]
+bg_color = Color(0, 0.41568628, 0.83137256, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8eu8y"]
+bg_color = Color(0.17254902, 0.7019608, 0.22745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5joi"]
+bg_color = Color(0.07058824, 0.4509804, 0.8392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6iib"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahsdt"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ssyy3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqs86"]
+
+[sub_resource type="Theme" id="Theme_7553d"]
+LineEdit/font_sizes/font_size = 20
+LineEdit/styles/normal = SubResource("StyleBoxFlat_ahsdt")
+SpinBox/constants/field_and_buttons_separation = 1
+SpinBox/styles/down_background = SubResource("StyleBoxFlat_ssyy3")
+SpinBox/styles/up_background = SubResource("StyleBoxFlat_gqs86")
+
+[node name="ControlDisplay" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_lvh1d")
+
+[node name="DisplayControl" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="DisplayControl"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Confirm
+"
+
+[node name="VSep" type="VSeparator" parent="DisplayControl"]
+layout_mode = 2
+
+[node name="ConsoleToggle" type="Button" parent="DisplayControl"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_7553d")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8eu8y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7553d")
+toggle_mode = true
+text = "Console"
+
+[node name="HSep" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BalanceDisplay" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Balance: 0.000 VND"
+vertical_alignment = 1
+
+[node name="HSep2" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BalanceControl" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBox" type="VBoxContainer" parent="BalanceControl"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="AddBalanceButton" type="Button" parent="BalanceControl/VBox"]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_b5joi")
+text = "Add"
+
+[node name="ReturnChangeButton" type="Button" parent="BalanceControl/VBox"]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_c6iib")
+text = "Return"
+
+[node name="VSep" type="VSeparator" parent="BalanceControl"]
+layout_mode = 2
+
+[node name="AddAmountSpinBox" type="SpinBox" parent="BalanceControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_7553d")
+max_value = 999.0
+rounded = true
+alignment = 1
+suffix = ".000 VND"
+
+[node name="BottomPanel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="DisplayControl/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="toggled" from="DisplayControl/ConfirmButton" to="." method="_on_confirm_button_toggled"]
+[connection signal="toggled" from="DisplayControl/ConsoleToggle" to="." method="_on_console_toggle_toggled"]
+[connection signal="pressed" from="BalanceControl/VBox/AddBalanceButton" to="." method="_on_add_balance_button_pressed"]
+[connection signal="pressed" from="BalanceControl/VBox/ReturnChangeButton" to="." method="_on_return_change_button_pressed"]

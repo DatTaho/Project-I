@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cpsgjg3k888c7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1rsg"]
+bg_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.17254902, 0.7019608, 0.22745098, 1)
+
+[resource]
+Button/font_sizes/font_size = 20
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_c1rsg")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://t8m147g4r5vv"]
+
+[ext_resource type="Script" uid="uid://d3pbgut3hdwn8" path="res://Scripts/item.gd" id="1_supjh"]
+
+[resource]
+script = ExtResource("1_supjh")
+id = "P003"
+name = "Stung"
+icon = "uid://8orj5abnkq3w"
+price = 12

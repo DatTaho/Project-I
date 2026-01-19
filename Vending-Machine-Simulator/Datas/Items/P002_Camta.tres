@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://b0dbmcoyhwofd"]
+
+[ext_resource type="Script" uid="uid://d3pbgut3hdwn8" path="res://Scripts/item.gd" id="1_4enmd"]
+
+[resource]
+script = ExtResource("1_4enmd")
+id = "P002"
+name = "Camta"
+icon = "uid://bdr6cpckgofan"
+price = 10
