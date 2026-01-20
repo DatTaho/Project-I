@@ -1,5 +1,5 @@
 # Vending Machine Simulator
-Submission for **Project I - IT3910E**, Hanoi University of Science and Technology
+Submission for **Project I - IT3910E**, Hanoi University of Science and Technology  
 By **Tạ Hồ Thành Đạt 20225482**
 
 ## Description
