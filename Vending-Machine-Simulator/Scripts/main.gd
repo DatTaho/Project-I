@@ -23,12 +23,15 @@ var panels : Array[ItemPanel] = []
 @export var coins : Array[int]
 @export var dispense_delay : float
 
+@onready var dispense_timer : Timer = $DispenseTimer
 @onready var transactions_dislay = $HBox/ItemView/TransactionsDisplay
 @onready var items_display = $HBox/ItemView/ItemsDisplay
 @onready var preview_display = $HBox/SideView/DisplayPanel/PreviewDisplay
 @onready var console_display = $HBox/SideView/DisplayPanel/ConsoleDisplay
 
 func _ready() -> void:
+	# Set up timer
+	dispense_timer.wait_time = dispense_delay
 	# Set up item panels
 	var index := 0
 	for panel : ItemPanel in inventory.get_children():

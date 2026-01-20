@@ -6,7 +6,7 @@ class_name ConsoleDisplay
 @onready var cmd : LineEdit = $ComandLine
 
 const DEFAULT = """Vending Machine Console
-Version 1.0
+Version 1.1
 """
 
 @export var transaction_logs : TransactionLogs

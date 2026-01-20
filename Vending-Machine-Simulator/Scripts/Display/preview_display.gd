@@ -34,3 +34,10 @@ func clear_display() -> void:
 	top_label.text = "Select an item"
 	item_view.texture = null
 	bottom_label.text = "for purchase"
+
+
+func _on_control_display_not_enough_balance() -> void:
+	var prev_state = bottom_label.text
+	bottom_label.text = "Not enough balance!"
+	await system.dispense_timer.timeout
+	bottom_label.text = prev_state

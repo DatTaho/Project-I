@@ -49,6 +49,10 @@ items_file = "res://Datas/Items/items.cfg"
 coins = Array[int]([100, 50, 20, 10, 5, 2, 1])
 dispense_delay = 0.2
 
+[node name="DispenseTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [node name="States" type="Node" parent="."]
 
 [node name="OperationState" type="Node" parent="States" node_paths=PackedStringArray("preview_display", "console_display", "control_display", "system")]
@@ -226,3 +230,4 @@ system = NodePath("..")
 [connection signal="mouse_entered" from="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" to="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" to="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap/PushFlapVisual" to="HBox/ItemView/ItemsDisplay/BottomPanel/PushFlap" method="_on_push_flap_visual_mouse_entered"]
+[connection signal="not_enough_balance" from="HBox/SideView/ControlPanel/ControlDisplay" to="HBox/SideView/DisplayPanel/PreviewDisplay" method="_on_control_display_not_enough_balance"]

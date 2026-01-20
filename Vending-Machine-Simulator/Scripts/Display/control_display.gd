@@ -48,16 +48,20 @@ func _on_return_change_button_pressed() -> void:
 	if system.display_return_changes():
 		set_balance(0) 
 
+signal not_enough_balance
 func _on_confirm_button_pressed() -> void:
 	if system.selected_panel == null:
 		return
-	if system.balance < system.selected_panel.item.price:
-		return
 	confirm_button.disabled = true
-	var item = system.selected_panel.dispense()
-	set_balance(system.balance - item.price)
-	transaction_logs.add_item(item)
-	await get_tree().create_timer(system.dispense_delay).timeout
+	if system.balance < system.selected_panel.item.price:
+		system.dispense_timer.start(1.0)
+		not_enough_balance.emit()
+	else:
+		system.dispense_timer.start()
+		var item = system.selected_panel.dispense()
+		set_balance(system.balance - item.price)
+		transaction_logs.add_item(item)
+	await system.dispense_timer.timeout
 	confirm_button.disabled = false
 
 func _on_console_toggle_toggled(toggled_on: bool) -> void:
