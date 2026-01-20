@@ -50,6 +50,10 @@ func _on_return_change_button_pressed() -> void:
 
 signal not_enough_balance
 func _on_confirm_button_pressed() -> void:
+	if system.state != State.Type.OPERATION:
+		if system.selected_panel != null:
+			system.selected_panel.button.button_pressed = false
+		return
 	if system.selected_panel == null:
 		return
 	confirm_button.disabled = true
